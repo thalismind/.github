@@ -1,0 +1,55 @@
+name: Feature request
+description: Propose a mechanic, client capability, plugin, tool, or operational improvement
+title: "[feature] "
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: Describe the requested capability in one or two sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and audience
+      description: Who needs this, and what is difficult or impossible today?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: home
+    attributes:
+      label: Likely home
+      description: Choose the repository or layer where this probably belongs. It is fine to select Unsure.
+      options:
+        - Server or shared simulation contract
+        - Browser client or shared web UI
+        - 3D client or plugin
+        - Reinforcement learning
+        - Existing simulation plugin
+        - New out-of-tree plugin
+        - Deployment or infrastructure
+        - Website or documentation
+        - Unsure
+    validations:
+      required: true
+
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Boundaries and sketch
+      description: Explain how it might fit existing authority, ECS, client, plugin, persistence, or deployment boundaries. Rough is fine.
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: How could we verify it?
+      description: Describe observable success, regression coverage, performance gates, or a player workflow that would prove it works.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Note workarounds or designs you considered and why they were insufficient.

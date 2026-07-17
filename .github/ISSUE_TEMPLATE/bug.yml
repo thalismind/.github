@@ -1,0 +1,73 @@
+name: Bug report
+description: Report behavior that is incorrect, unsafe, or unexpectedly slow
+title: "[bug] "
+body:
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      description: Choose the closest part of Bunnyland.
+      options:
+        - Server or simulation
+        - Browser client or shared web UI
+        - 3D client or plugin
+        - Reinforcement learning
+        - Simulation plugin or addon
+        - Deployment or infrastructure
+        - Website or documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened?
+      description: Describe the incorrect behavior and its impact.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      description: Describe the behavior you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the smallest repeatable sequence, plus a seed, snapshot, URL, or input artifact when relevant.
+      placeholder: |
+        1. Start from ...
+        2. Run or select ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Provide the relevant commit, release, container digest, or deployed version if known.
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include relevant browser, operating system, Python or Node version, provider/model, plugin set, or deployment details.
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Paste exact errors, rejection reasons, logs, traces, screenshots, or performance measurements. Remove secrets first.
+
+  - type: checkboxes
+    id: automation
+    attributes:
+      label: Automation disclosure
+      options:
+        - label: A bot or agent generated or assisted with this report. This is tracing information, not a disclaimer.
