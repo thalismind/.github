@@ -53,6 +53,12 @@ body:
       label: Version or commit
       description: Provide the relevant commit, release, container digest, or deployed version if known.
 
+  - type: input
+    id: last_known_good
+    attributes:
+      label: Last known good version
+      description: If this is a regression, provide the most recent version or commit where the behavior worked.
+
   - type: textarea
     id: environment
     attributes:

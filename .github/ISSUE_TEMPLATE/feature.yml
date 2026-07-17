@@ -49,6 +49,12 @@ body:
       description: Describe observable success, regression coverage, performance gates, or a player workflow that would prove it works.
 
   - type: textarea
+    id: constraints
+    attributes:
+      label: Risks and constraints
+      description: Consider authorization and visibility, performance and memory scaling, persistence, compatibility, hostile input, and operational cost where relevant.
+
+  - type: textarea
     id: alternatives
     attributes:
       label: Alternatives considered

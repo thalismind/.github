@@ -17,6 +17,13 @@ documented by this repository.
 - [ ] Generated artifacts, dependencies, credentials, and unrelated files were not committed.
 - [ ] The diff was reviewed for accidental compatibility shims, hidden fallbacks, and avoidable performance costs.
 
+When applicable to the changed surface:
+
+- [ ] Authorization behavior is consistent across every affected REST, WebSocket, and MCP surface.
+- [ ] Performance-sensitive work includes before/after measurements at representative scale.
+- [ ] ECS systems select candidates through one indexed driving component rather than an A-or-B or full-world scan.
+- [ ] Browser rendering and event handling cover hostile identifiers, labels, URLs, and event data.
+
 Paste relevant test output, screenshots, traces, or performance results:
 
 ```text
