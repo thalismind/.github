@@ -1,0 +1,67 @@
+name: Bunnyland plugin CI
+
+on:
+  workflow_call:
+    inputs:
+      coverage_min:
+        description: Minimum statement and branch coverage percentage
+        required: false
+        type: number
+        default: 95
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-test:
+    name: Lint & Test (${{ matrix.runtime }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runtime: server
+            image: ghcr.io/thalismind/bunnyland-server:main
+          - runtime: 3d
+            image: ghcr.io/thalismind/bunnyland-3d-server:main
+    steps:
+      - name: Checkout plugin
+        uses: actions/checkout@v6
+
+      - name: Pull published runtime
+        run: docker pull "${{ matrix.image }}"
+
+      - name: Lint and test plugin
+        env:
+          COVERAGE_MIN: ${{ inputs.coverage_min }}
+        run: |
+          docker run --rm \
+            --entrypoint /bin/bash \
+            -e COVERAGE_MIN \
+            -v "$PWD/server:/workspace/plugin" \
+            -w /workspace/plugin \
+            "${{ matrix.image }}" \
+            -ec '
+              uv pip install --python /app/.venv/bin/python --no-deps -e .
+              uv pip install --python /app/.venv/bin/python "ruff>=0.6" "pytest>=8" "pytest-cov>=5"
+              ruff check --output-format=github src tests
+              set -o pipefail
+              mkdir -p reports
+              python -m pytest \
+                --junit-xml=reports/junit.xml \
+                --cov=src --cov-branch --cov-fail-under="$COVERAGE_MIN" \
+                --cov-report=xml:reports/coverage.xml --cov-report=term \
+                | tee reports/pytest.txt
+            '
+          {
+            echo "### ${{ matrix.runtime }} test summary"
+            tail -n 1 server/reports/pytest.txt
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-reports-${{ matrix.runtime }}
+          path: server/reports/
+          if-no-files-found: warn
