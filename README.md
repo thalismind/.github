@@ -11,3 +11,8 @@ Repository-local overrides are appropriate when the questions or verification co
 materially differ. Server and Web keep specialized issue and pull request templates for
 that reason. Do not add pointer templates or copies of these generic defaults; repositories
 without a real specialization should inherit this repository directly.
+
+## License
+
+Licensed under the GNU Affero General Public License v3.0 or later. See
+[LICENSE](LICENSE).
